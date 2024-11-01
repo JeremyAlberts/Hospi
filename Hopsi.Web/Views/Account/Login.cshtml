@@ -1,8 +1,8 @@
-﻿@using Hopsi.Web.Models.Identity
-@model RegisterVM
+﻿@using Hopsi.Web.Models.Account
+@model LoginVM
 
-<form id="registerForm" asp-action="Register" method="post">
-    <h2>Create a new account.</h2>
+<form id="registerForm" asp-action="Login" method="post">
+    <h2>Login</h2>
     <hr />
     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
     <div class="form-floating mb-3">
@@ -17,3 +17,6 @@
     </div>
     <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
 </form>
+
+
+

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Hopsi.Controllers
+namespace Hopsi.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,7 +19,7 @@ namespace Hopsi.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult>  Index()
+        public async Task<IActionResult> Index()
         {
             var houses = await _houseBusiessService.SearchAsync(CancellationToken.None);
 

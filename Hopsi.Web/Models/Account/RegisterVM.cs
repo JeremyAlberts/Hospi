@@ -1,6 +1,6 @@
-﻿namespace Hopsi.Web.Models.Identity
+﻿namespace Hopsi.Web.Models.Account
 {
-    public class LoginVM
+    public class RegisterVM
     {
         public string Username { get; set; }
         public string Password { get; set; }

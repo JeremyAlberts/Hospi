@@ -40,7 +40,7 @@
                     @if (signInManager.IsSignedIn(User))
                     {
                         <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                           asp-controller="Identity" asp-action="Logout">
+                           asp-controller="Account" asp-action="Logout">
                             Logout
                         </a>
                     }
@@ -48,12 +48,12 @@
                     {
                         <div class="sm:flex sm:gap-4">
                             <a class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                               asp-controller="Identity" asp-action="Login">
+                               asp-controller="Account" asp-action="Login">
                                 Login
                             </a>
 
                             <a class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                               asp-controller="Identity" asp-action="Register">
+                               asp-controller="Account" asp-action="Register">
                                 Register
                             </a>
                         </div>
