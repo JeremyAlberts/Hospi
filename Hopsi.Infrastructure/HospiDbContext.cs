@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hopsi.Infrastructure
 {
-    public class HospiDbContext : IdentityDbContext
+    public class HospiDbContext : IdentityDbContext<AppUser>
     {
         public HospiDbContext(DbContextOptions<HospiDbContext> options)
             : base(options)
