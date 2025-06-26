@@ -10,5 +10,7 @@ namespace Hospi.Core.Entities
         public DateTimeOffset? EndDate { get; set; }
         public bool Indefinite { get; set; }
         public decimal Price { get; set; }
+        public Guid HouseId { get; set; }
+        public House House { get; set; }
     }
 }

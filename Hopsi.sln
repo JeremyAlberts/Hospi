@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hopsi.Infrastructure", "Hop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospi.Core", "Hospi.Core\Hospi.Core.csproj", "{BD790DD2-FAF4-4192-96C6-5C5BE826119B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hopsi.Web", "Hopsi.Web\Hopsi.Web.csproj", "{0DCA276D-AD6F-4AF5-9651-21115472CA23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hopsi.Api", "Hopsi.Web\Hopsi.Api.csproj", "{0DCA276D-AD6F-4AF5-9651-21115472CA23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

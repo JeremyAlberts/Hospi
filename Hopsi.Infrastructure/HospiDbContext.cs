@@ -1,10 +1,11 @@
 ﻿using Hospi.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hopsi.Infrastructure
 {
-    public class HospiDbContext : IdentityDbContext<AppUser>
+    public class HospiDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         public HospiDbContext(DbContextOptions<HospiDbContext> options)
             : base(options)
