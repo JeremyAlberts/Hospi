@@ -12,6 +12,9 @@ using Hopsi.Api.Core;
 using Hospi.Core.Interfaces;
 using Hospi.Core.Services;
 using Hopsi.Api.Services;
+using Microsoft.OpenApi.Models;
+using Hopsi.Infrastructure.Repositories;
+using Hopsi.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,14 +24,43 @@ builder.Services.AddDbContext<HospiDbContext>(optionsAction =>
 builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<HospiDbContext>();
 
-//builder.Services.AddSwaggerSecurity();
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description =
+                    "JWT Authorization header using the Bearer scheme. \r\n\r\n " +
+                    "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
+                    "Example: \"Bearer 12345abcdef\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
 
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IRepository<House>, Repository<House>>();
+builder.Services.AddScoped<IHouseRepository, HouseRepository>();
 builder.Services.AddScoped<IHouseService, HouseService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -87,6 +119,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 

@@ -18,6 +18,30 @@ namespace Hopsi.Api.Core
             _tokenService = tokenService;
         }
 
+        public async Task<string> Login(LoginUserModel loginUserModel)
+        {
+            try
+            {
+                _logger.LogInformation("Login in user {@loginUserModel}", loginUserModel);
+
+                var user = await _userManager.FindByEmailAsync(loginUserModel.Email);
+
+                if (user == null)
+                {
+                    throw new Exception("user not found");
+                }
+
+                var token = await _tokenService.GenerateAccesToken(user);
+
+                return token;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("login in user went wrong {@loginUserModel}", loginUserModel);
+                return "hel";
+            }
+        }
+
         public async Task<string> Register(RegisterUserModel registerUserModel)
         {
             try

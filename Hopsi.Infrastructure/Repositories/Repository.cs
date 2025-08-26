@@ -1,12 +1,13 @@
 ﻿using Hospi.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
-namespace Hopsi.Infrastructure
+namespace Hopsi.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly HospiDbContext _db;
-        private readonly DbSet<T> _dbSet;
+        protected readonly HospiDbContext _db;
+        protected readonly DbSet<T> _dbSet;
 
         public Repository(HospiDbContext db)
         {
@@ -27,14 +28,16 @@ namespace Hopsi.Infrastructure
             await SaveAsync(token);
         }
 
-        public async Task<IReadOnlyCollection<T>> GetAsync(CancellationToken token)
+        public async Task<IReadOnlyCollection<T>> GetAsync(Expression<Func<T, bool>> predicate, CancellationToken token)
         {
-            return await _dbSet.ToListAsync(token);
+            return await _dbSet.Where(predicate).ToListAsync(token);
         }
 
         public async Task<T> GetByIdAsync(Guid id, CancellationToken token)
         {
-            return await _dbSet.SingleOrDefaultAsync(e => e.Id == id, token);
+            var entity = await _dbSet.SingleOrDefaultAsync(e => e.Id == id, token);
+
+            return entity;
         }
 
         public async Task SaveAsync(CancellationToken token)

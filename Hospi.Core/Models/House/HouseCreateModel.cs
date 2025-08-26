@@ -1,21 +1,16 @@
-﻿using Hospi.Core.Interfaces;
+﻿using Hospi.Core.Entities;
 
-namespace Hospi.Core.Entities
+namespace Hospi.Core.Models.House
 {
-    public class House : IEntity
+    public class HouseCreateModel
     {
-        public Guid Id { get; set; }
         public string StreetName { get; set; }
         public string HouseNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
         public string ImageUrl { get; set; }
         public string Description { get; set; }
-        public string Adres => $"{StreetName} {HouseNumber}";
         public string Affiliation { get; set; }
-        public IReadOnlyCollection<Room> Rooms => _rooms.AsReadOnly();
-        private List<Room> _rooms = [];
-        public Guid OwnerId { get; set; }
         public AppUser Owner { get; set; }
     }
 }

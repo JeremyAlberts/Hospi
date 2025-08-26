@@ -33,7 +33,7 @@ namespace Hopsi.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO, CancellationToken token)
         {
-            _logger.LogInformation("Registering user {@RegisterDTO}", registerDTO);
+            _logger.LogInformation("Registering user {@registerDTO}", registerDTO);
 
             var model = new RegisterUserModel {
                 FirstName = registerDTO.FirstName,
@@ -43,6 +43,22 @@ namespace Hopsi.Api.Controllers
             };
 
             var res = await _authService.Register(model);
+
+            return Ok(res);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO, CancellationToken token)
+        {
+            _logger.LogInformation("Login user {@loginDTO}", loginDTO);
+
+            var model = new LoginUserModel
+            {
+                Email = loginDTO.Email,
+                Password = loginDTO.Password,
+            };
+
+            var res = await _authService.Login(model);
 
             return Ok(res);
         }

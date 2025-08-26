@@ -6,5 +6,7 @@ namespace Hospi.Core.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public IReadOnlyCollection<House> Houses => _houses.AsReadOnly();
+        private List<House> _houses = [];
     }
 }
